@@ -1,11 +1,18 @@
 apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
+kind: Schedule
 metadata:
   name: pod-kill-example
-  namespace: chaos-testing
+  namespace: appns
 spec:
-  action: pod-kill
-  mode: one
-  selector:
-    namespaces:
-      - appns
+  schedule: '*/1 * * * *'
+  startingDeadlineSeconds: null
+  concurrencyPolicy: Forbid
+  historyLimit: 1
+  type: PodChaos
+  podChaos:
+    selector:
+      namespaces:
+        - appns
+    mode: one
+    action: pod-kill
+    gracePeriod: 0
