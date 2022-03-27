@@ -9,5 +9,3 @@ spec:
   selector:
     namespaces:
       - appns
-  scheduler:
-    cron: "@every 1m"
